@@ -1,0 +1,355 @@
+.islamic-rulings-page {
+  padding: 40px 0;
+  min-height: 100vh;
+}
+
+.search-bar {
+  position: relative;
+  margin-bottom: 32px;
+}
+
+.ruling-search-input {
+  width: 100%;
+  padding: 16px 50px 16px 24px;
+  font-size: 1.1rem;
+  border: 2px solid var(--neutral-gray);
+  border-radius: 12px;
+  font-family: 'Amiri', serif;
+  background: var(--bg-white);
+  color: var(--text-primary);
+  transition: all var(--transition-fast);
+}
+
+.ruling-search-input:focus {
+  outline: none;
+  border-color: var(--primary-main);
+  box-shadow: 0 0 0 3px var(--primary-lighter);
+}
+
+.search-icon {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.3rem;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.category-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 24px;
+  background: var(--bg-white);
+  border: 2px solid var(--neutral-gray);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.category-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-main);
+}
+
+.category-card.active {
+  background: var(--primary-main);
+  color: var(--text-light);
+  border-color: var(--primary-main);
+  box-shadow: var(--shadow-lg);
+}
+
+.category-icon {
+  font-size: 2.5rem;
+}
+
+.category-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-family: 'Amiri', serif;
+}
+
+.calculator-section {
+  background: var(--bg-white);
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 32px;
+  border-right: 4px solid var(--secondary-main);
+}
+
+.calculator-section h2 {
+  color: var(--primary-main);
+  margin-bottom: 24px;
+  font-size: 1.8rem;
+}
+
+.warning-note {
+  background: #fff3cd;
+  border: 2px solid #ffc107;
+  padding: 12px 16px;
+  border-radius: 8px;
+  color: #856404;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.calculator-inputs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-group label {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.input-group input[type="number"] {
+  padding: 12px 16px;
+  border: 2px solid var(--neutral-gray);
+  border-radius: 8px;
+  font-family: 'Amiri', serif;
+  font-size: 1rem;
+  background: var(--bg-light);
+  color: var(--text-primary);
+}
+
+.input-group input[type="number"]:focus {
+  outline: none;
+  border-color: var(--primary-main);
+}
+
+.checkbox-group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.calculate-btn {
+  padding: 14px 32px;
+  background: var(--secondary-main);
+  color: var(--text-light);
+  border: none;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: 'Amiri', serif;
+  width: 100%;
+}
+
+.calculate-btn:hover {
+  background: var(--secondary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.result-card {
+  background: var(--primary-lighter);
+  padding: 24px;
+  border-radius: 12px;
+  margin-top: 24px;
+  border-right: 4px solid var(--primary-main);
+}
+
+.result-card h3 {
+  color: var(--primary-main);
+  margin-bottom: 16px;
+}
+
+.result-card p {
+  font-size: 1.1rem;
+  margin: 12px 0;
+  color: var(--text-primary);
+}
+
+.result-card .note {
+  background: var(--secondary-lighter);
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 16px;
+  font-weight: 600;
+  color: var(--secondary-dark);
+}
+
+.rulings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ruling-card {
+  background: var(--bg-white);
+  padding: 28px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-normal);
+  border-right: 4px solid var(--primary-main);
+}
+
+.ruling-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateX(-4px);
+}
+
+.ruling-title {
+  color: var(--primary-main);
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+.ruling-content {
+  font-size: 1.1rem;
+  line-height: 2;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+}
+
+.ruling-evidence {
+  background: var(--bg-light-green);
+  padding: 16px 20px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  border-right: 3px solid var(--secondary-main);
+}
+
+.ruling-evidence strong {
+  color: var(--secondary-main);
+  display: block;
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+}
+
+.ruling-evidence p {
+  font-family: 'Amiri Quran', 'Amiri', serif;
+  font-size: 1.2rem;
+  line-height: 2.2;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.ruling-references {
+  background: var(--bg-cream);
+  padding: 16px 20px;
+  border-radius: 12px;
+}
+
+.ruling-references strong {
+  color: var(--text-primary);
+  display: block;
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+}
+
+.ruling-references ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ruling-references li {
+  padding: 6px 0;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.ruling-references li::before {
+  content: '📌 ';
+  margin-left: 8px;
+}
+
+.no-results {
+  text-align: center;
+  padding: 60px 20px;
+  background: var(--bg-white);
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+}
+
+.no-results-icon {
+  font-size: 4rem;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.no-results p {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .calculator-section {
+    padding: 20px;
+  }
+
+  .calculator-inputs {
+    grid-template-columns: 1fr;
+  }
+
+  .checkbox-group {
+    grid-template-columns: 1fr;
+  }
+
+  .ruling-card {
+    padding: 20px;
+  }
+
+  .ruling-title {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .categories-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .category-icon {
+    font-size: 2rem;
+  }
+
+  .category-name {
+    font-size: 1rem;
+  }
+
+  .ruling-evidence p {
+    font-size: 1.1rem;
+  }
+}

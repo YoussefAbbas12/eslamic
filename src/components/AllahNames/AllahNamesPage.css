@@ -1,0 +1,158 @@
+.allah-names-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2rem 0;
+}
+
+.hadith-quote {
+  font-family: 'Amiri', serif;
+  font-size: 1.2rem;
+  color: #fff;
+  text-align: center;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  margin: 1rem auto;
+  max-width: 800px;
+  line-height: 1.8;
+}
+
+.names-count {
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
+.names-count p {
+  font-family: 'Amiri', serif;
+  font-size: 1.2rem;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  display: inline-block;
+}
+
+.names-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.name-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.name-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  border: 2px solid #667eea;
+}
+
+.name-card.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+}
+
+.name-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.name-number {
+  background: rgba(102, 126, 234, 0.1);
+  color: #667eea;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.name-card.active .name-number {
+  background: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+.name-arabic {
+  font-family: 'Amiri', serif;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #2C5F2D;
+}
+
+.name-card.active .name-arabic {
+  color: white;
+}
+
+.name-transliteration {
+  font-size: 1rem;
+  color: #666;
+  font-style: italic;
+  text-align: right;
+}
+
+.name-card.active .name-transliteration {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.name-details {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid rgba(255, 255, 255, 0.3);
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.name-meaning,
+.name-explanation {
+  margin-bottom: 1rem;
+  font-family: 'Amiri', serif;
+}
+
+.name-meaning strong,
+.name-explanation strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.name-meaning p,
+.name-explanation p {
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.05rem;
+}
+
+@media (max-width: 768px) {
+  .names-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .name-arabic {
+    font-size: 1.5rem;
+  }
+}

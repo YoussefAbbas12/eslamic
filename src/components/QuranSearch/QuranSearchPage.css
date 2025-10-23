@@ -1,0 +1,302 @@
+.quran-search-page {
+  padding: 40px 0;
+  min-height: 100vh;
+}
+
+.search-section {
+  background: var(--bg-white);
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 32px;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.search-input-group {
+  display: flex;
+  gap: 12px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 16px 24px;
+  font-size: 1.1rem;
+  border: 2px solid var(--neutral-gray);
+  border-radius: 12px;
+  font-family: 'Amiri', serif;
+  background: var(--bg-light);
+  color: var(--text-primary);
+  transition: all var(--transition-fast);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary-main);
+  box-shadow: 0 0 0 3px var(--primary-lighter);
+}
+
+.search-button {
+  padding: 16px 32px;
+  background: var(--primary-main);
+  color: var(--text-light);
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: 'Amiri', serif;
+  white-space: nowrap;
+}
+
+.search-button:hover:not(:disabled) {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.search-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.edition-selector {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.edition-selector label {
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.edition-select {
+  flex: 1;
+  padding: 12px 16px;
+  border: 2px solid var(--neutral-gray);
+  border-radius: 8px;
+  font-family: 'Amiri', serif;
+  font-size: 1rem;
+  background: var(--bg-light);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background: #fee;
+  border: 2px solid #fcc;
+  border-radius: 8px;
+  color: #c00;
+  font-weight: 600;
+  margin-top: 16px;
+}
+
+.results-count {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background: var(--primary-lighter);
+  border-radius: 8px;
+  margin-top: 16px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.count-badge {
+  background: var(--primary-main);
+  color: var(--text-light);
+  padding: 4px 16px;
+  border-radius: 20px;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.search-results {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.result-card {
+  background: var(--bg-white);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-normal);
+  border-right: 4px solid var(--primary-main);
+}
+
+.result-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateX(-4px);
+}
+
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.surah-name {
+  color: var(--primary-main);
+  font-size: 1.5rem;
+  margin: 0;
+  font-weight: 700;
+}
+
+.result-meta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.meta-badge {
+  background: var(--secondary-lighter);
+  color: var(--secondary-dark);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.ayah-text {
+  font-size: 1.8rem;
+  line-height: 2.5;
+  margin: 24px 0;
+  padding: 24px;
+  background: var(--bg-light-green);
+  border-radius: 12px;
+  color: var(--text-primary);
+}
+
+.result-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 2px solid var(--neutral-gray);
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.surah-english {
+  font-weight: 600;
+  color: var(--primary-main);
+}
+
+.ayah-number {
+  font-weight: 500;
+}
+
+.no-results {
+  text-align: center;
+  padding: 60px 20px;
+  background: var(--bg-white);
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+}
+
+.no-results-icon {
+  font-size: 4rem;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.no-results p {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin: 8px 0;
+}
+
+.no-results-hint {
+  font-size: 1rem !important;
+  color: var(--text-secondary);
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .search-section {
+    padding: 20px;
+  }
+
+  .search-input-group {
+    flex-direction: column;
+  }
+
+  .search-button {
+    width: 100%;
+  }
+
+  .edition-selector {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .result-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .result-meta {
+    justify-content: flex-start;
+  }
+
+  .ayah-text {
+    font-size: 1.5rem;
+    line-height: 2.2;
+    padding: 16px;
+  }
+
+  .result-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .quran-search-page {
+    padding: 20px 0;
+  }
+
+  .search-input {
+    font-size: 1rem;
+    padding: 14px 18px;
+  }
+
+  .search-button {
+    padding: 14px 24px;
+    font-size: 1rem;
+  }
+
+  .ayah-text {
+    font-size: 1.3rem;
+    line-height: 2;
+  }
+
+  .surah-name {
+    font-size: 1.3rem;
+  }
+
+  .meta-badge {
+    font-size: 0.85rem;
+    padding: 4px 10px;
+  }
+}

@@ -1,0 +1,375 @@
+.homepage {
+  min-height: 100vh;
+}
+
+.hero-section {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-main) 50%, var(--primary-light) 100%);
+  padding: 80px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.05" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+  background-size: cover;
+}
+
+.hero-content {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-decoration {
+  margin-bottom: 24px;
+}
+
+.decoration-icon {
+  font-size: 4rem;
+  display: inline-block;
+  filter: drop-shadow(0 4px 12px rgba(255, 255, 255, 0.3));
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+.hero-title {
+  font-size: 3rem;
+  color: var(--neutral-white);
+  margin-bottom: 24px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  font-weight: 700;
+  animation-delay: 0.2s;
+}
+
+.hero-subtitle {
+  font-size: 2rem;
+  color: var(--secondary-lighter);
+  margin-bottom: 20px;
+  font-family: 'Amiri Quran', serif;
+  line-height: 2;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  animation-delay: 0.4s;
+}
+
+.hero-description {
+  font-size: 1.3rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.8;
+  max-width: 700px;
+  margin: 0 auto;
+  animation-delay: 0.6s;
+}
+
+.features-section {
+  padding: 80px 24px;
+  background: var(--bg-light);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-header h2 {
+  font-size: 2.5rem;
+  color: var(--primary-main);
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+.header-divider {
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, var(--secondary-main), transparent);
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  position: relative;
+  background: var(--bg-white);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+  transition: all var(--transition-normal);
+  animation: slideUp var(--transition-slow) both;
+  animation-delay: var(--delay);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
+}
+
+.feature-card-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  opacity: 0.9;
+  transition: all var(--transition-normal);
+}
+
+.feature-card:hover .feature-card-bg {
+  height: 100%;
+  opacity: 1;
+}
+
+.feature-content {
+  position: relative;
+  padding: 32px 24px;
+  z-index: 1;
+}
+
+.feature-icon {
+  font-size: 4rem;
+  margin-bottom: 16px;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+  transition: all var(--transition-normal);
+}
+
+.feature-card:hover .feature-icon {
+  transform: scale(1.1) rotate(5deg);
+  filter: drop-shadow(0 4px 12px rgba(255, 255, 255, 0.3));
+}
+
+.feature-title {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  font-weight: 700;
+  transition: color var(--transition-normal);
+}
+
+.feature-card:hover .feature-title {
+  color: var(--neutral-white);
+}
+
+.feature-description {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 16px;
+  transition: color var(--transition-normal);
+}
+
+.feature-card:hover .feature-description {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.feature-arrow {
+  font-size: 1.5rem;
+  color: var(--primary-main);
+  transition: all var(--transition-normal);
+  display: inline-block;
+}
+
+.feature-card:hover .feature-arrow {
+  color: var(--neutral-white);
+  transform: translateX(-8px);
+}
+
+.quran-verse-section {
+  padding: 80px 24px;
+  background: linear-gradient(135deg, var(--bg-light-green) 0%, var(--bg-cream) 100%);
+}
+
+.verse-card {
+  max-width: 900px;
+  margin: 0 auto;
+  background: var(--bg-white);
+  padding: 48px 32px;
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+  position: relative;
+  border: 2px solid var(--primary-lighter);
+}
+
+.verse-decoration {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary-main);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--neutral-white);
+  box-shadow: var(--shadow-md);
+}
+
+.verse-card .quran-text {
+  font-size: 2rem;
+  line-height: 2.5;
+  margin-bottom: 24px;
+}
+
+.verse-reference {
+  font-size: 1.2rem;
+  color: var(--secondary-main);
+  font-weight: 600;
+}
+
+.stats-section {
+  padding: 60px 24px;
+  background: var(--bg-white);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 32px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 32px 16px;
+  background: linear-gradient(135deg, var(--primary-lighter) 0%, var(--bg-light) 100%);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+}
+
+.stat-item:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  background: linear-gradient(135deg, var(--primary-main) 0%, var(--primary-light) 100%);
+}
+
+.stat-number {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--primary-main);
+  margin-bottom: 8px;
+  transition: color var(--transition-normal);
+}
+
+.stat-item:hover .stat-number {
+  color: var(--neutral-white);
+}
+
+.stat-label {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  transition: color var(--transition-normal);
+}
+
+.stat-item:hover .stat-label {
+  color: var(--neutral-white);
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 60px 16px;
+  }
+  
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.5rem;
+  }
+  
+  .hero-description {
+    font-size: 1.1rem;
+  }
+  
+  .features-section {
+    padding: 60px 16px;
+  }
+  
+  .section-header h2 {
+    font-size: 2rem;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .verse-card {
+    padding: 32px 24px;
+  }
+  
+  .verse-card .quran-text {
+    font-size: 1.5rem;
+    line-height: 2.2;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  .stat-number {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .decoration-icon {
+    font-size: 3rem;
+  }
+  
+  .hero-title {
+    font-size: 1.75rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.25rem;
+  }
+  
+  .verse-card .quran-text {
+    font-size: 1.3rem;
+  }
+  
+  .stat-number {
+    font-size: 2rem;
+  }
+  
+  .stat-label {
+    font-size: 1rem;
+  }
+}

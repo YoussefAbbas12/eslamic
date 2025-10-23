@@ -1,0 +1,336 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amiri+Quran&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-main: #2C5F2D;
+  --primary-light: #97BC62FF;
+  --primary-dark: #1B3A1C;
+  --primary-lighter: #E8F4E8;
+  
+  --secondary-main: #B8860B;
+  --secondary-light: #DAA520;
+  --secondary-dark: #8B6914;
+  --secondary-lighter: #FFF8DC;
+  
+  --neutral-white: #FFFFFF;
+  --neutral-light-gray: #F5F5F5;
+  --neutral-gray: #E0E0E0;
+  --neutral-medium-gray: #9E9E9E;
+  --neutral-dark-gray: #424242;
+  --neutral-black: #1A1A1A;
+  
+  --text-primary: #1A1A1A;
+  --text-secondary: #5C5C5C;
+  --text-light: #FFFFFF;
+  --text-accent: #B8860B;
+  
+  --bg-light: #FAFAFA;
+  --bg-white: #FFFFFF;
+  --bg-cream: #FFF8DC;
+  --bg-light-green: #F0F7F0;
+  
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.18);
+  
+  --transition-fast: 150ms ease-in-out;
+  --transition-normal: 250ms ease-in-out;
+  --transition-slow: 350ms ease-in-out;
+
+  --cir: '#dab265';
+}
+
+body.dark-mode {
+  --primary-main: #4A8F4C;
+  --primary-light: #6BAA6D;
+  --primary-dark: #2C5F2D;
+  --primary-lighter: #1E3A1F;
+  
+  --secondary-main: #D4AF37;
+  --secondary-light: #E6C966;
+  --secondary-dark: #B8941E;
+  --secondary-lighter: #3A3520;
+  
+  --neutral-white: #FFFFFF;
+  --neutral-light-gray: #2A2A2A;
+  --neutral-gray: #3C3C3C;
+  --neutral-medium-gray: #757575;
+  --neutral-dark-gray: #E0E0E0;
+  --neutral-black: #FAFAFA;
+  
+  --text-primary: #E8E8E8;
+  --text-secondary: #B0B0B0;
+  --text-light: #1A1A1A;
+  --text-accent: #D4AF37;
+  
+  --bg-light: #121212;
+  --bg-white: #1E1E1E;
+  --bg-cream: #2A2520;
+  --bg-light-green: #1A2E1B;
+  
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.6);
+}
+
+body {
+  font-family: 'Amiri', 'Traditional Arabic', serif;
+  background-color: var(--bg-light);
+  color: var(--text-primary);
+  direction: rtl;
+  text-align: right;
+  line-height: 1.8;
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+a {
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: 2rem;
+  line-height: 1.3;
+}
+
+h3 {
+  font-size: 1.5rem;
+  line-height: 1.4;
+}
+
+p {
+  margin-bottom: 16px;
+  color: var(--text-secondary);
+}
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+  width: 100%;
+}
+
+.page-container {
+  padding: 24px 0;
+  min-height: calc(100vh - 80px);
+}
+
+.quran-text {
+  font-family: 'Amiri Quran', 'KFGQPC Uthman Taha Naskh', serif;
+  font-size: 1.8rem;
+  line-height: 2.2;
+  color: var(--text-primary);
+}
+
+.card {
+  background: var(--bg-white);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-normal);
+  border: 1px solid var(--neutral-gray);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: 'Amiri', serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+
+.btn-primary {
+  background: var(--primary-main);
+  color: var(--text-light);
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+  background: var(--secondary-main);
+  color: var(--text-light);
+}
+
+.btn-secondary:hover {
+  background: var(--secondary-dark);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--primary-main);
+  color: var(--primary-main);
+}
+
+.btn-outline:hover {
+  background: var(--primary-main);
+  color: var(--text-light);
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  gap: 16px;
+}
+
+.spinner {
+  border: 3px solid var(--neutral-gray);
+  border-top: 3px solid var(--primary-main);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.fade-in {
+  animation: fadeIn var(--transition-slow);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
+.circle{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s ease-in-out;
+}
+
+svg{
+  position: relative;
+  transform: rotate(270deg);
+  transition: 0.3s ease-in-out;
+}
+
+svg{
+  width: 250px;
+  height: 250px;
+  transition: 0.3s ease-in-out;
+}
+
+svg circle{
+  width: 100%;
+  height: 100%;
+  fill: transparent;
+  stroke-width: 5;
+  stroke: var(--cir);
+  transform: translate(5px, 5px);
+  transition: 0.3s ease-in-out;
+}
+
+svg circle{
+  stroke-dasharray: 760;
+  stroke-dashoffset: 760;
+  transition: 0.3s ease-in-out;
+}
+
+.dots{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 10;
+  transition: 0.3s ease-in-out;
+}
+
+.dots::before{
+  content: '';
+  position: absolute;
+  top: -3px;
+  width: 15px;
+  height: 15px;
+  background-color: var(--cir);
+  border-radius: 50%;
+  box-shadow: 0 0 20px var(--cir),
+  0 0 40px var(--cir),
+  0 0 60px var(--cir),
+  0 0 80px var(--cir);
+}
+
+@media(max-width: 580px){
+  .clock{
+    width: 250px;
+    height: 250px;
+  }
+  #time{
+    height: 220px;
+  }
+}
+
+.tasbehBts{
+  position: absolute;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 37px;
+  cursor: pointer;
+  z-index: 101;
+}
+.count{
+  color: #dab265;
+}

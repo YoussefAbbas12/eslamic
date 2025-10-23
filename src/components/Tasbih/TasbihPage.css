@@ -1,0 +1,429 @@
+.tasbih-page {
+  padding: 40px 0;
+  min-height: 100vh;
+}
+
+.categories-selector {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 32px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.category-tab {
+  padding: 14px 24px;
+  background: var(--bg-white);
+  border: 2px solid var(--neutral-gray);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: 'Amiri', serif;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.category-tab:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--category-color);
+}
+
+.category-tab.active {
+  background: var(--category-color);
+  color: var(--neutral-white);
+  border-color: var(--category-color);
+  box-shadow: var(--shadow-md);
+}
+
+.category-tab span:first-child {
+  font-size: 1.5rem;
+}
+
+.tasbih-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 32px;
+}
+
+.dhikr-list-sidebar {
+  background: var(--bg-white);
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  height: fit-content;
+  position: sticky;
+  top: 90px;
+}
+
+.dhikr-list-sidebar h3 {
+  font-size: 1.3rem;
+  color: var(--primary-main);
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--primary-lighter);
+}
+
+.dhikr-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.dhikr-item {
+  padding: 16px;
+  background: var(--bg-light);
+  border: 2px solid var(--neutral-gray);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: 'Amiri', serif;
+  text-align: right;
+}
+
+.dhikr-item:hover {
+  background: var(--primary-lighter);
+  border-color: var(--primary-light);
+  transform: translateX(-4px);
+}
+
+.dhikr-item.active {
+  background: var(--primary-main);
+  color: var(--neutral-white);
+  border-color: var(--primary-main);
+}
+
+.dhikr-preview {
+  font-size: 1rem;
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+.dhikr-count-badge {
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.dhikr-item.active .dhikr-count-badge {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.tasbih-counter-section {
+  background: var(--bg-white);
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+}
+
+.dhikr-text-display {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.dhikr-text {
+  font-size: 2rem;
+  line-height: 2.5;
+  color: var(--text-primary);
+  font-family: 'Amiri', serif;
+  margin-bottom: 20px;
+  padding: 24px;
+  background: var(--bg-light-green);
+  border-radius: 12px;
+  border: 2px solid var(--primary-lighter);
+}
+
+.dhikr-benefit-display {
+  background: var(--secondary-lighter);
+  padding: 16px 24px;
+  border-radius: 12px;
+  border-right: 4px solid var(--secondary-main);
+  font-size: 1.1rem;
+  line-height: 1.8;
+  text-align: right;
+}
+
+.dhikr-benefit-display strong {
+  color: var(--secondary-dark);
+}
+
+.counter-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.circular-counter {
+  position: relative;
+  width: 340px;
+  height: 340px;
+  user-select: none;
+}
+
+.circular-counter.animate {
+  animation: pulse 0.3s ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+.progress-circle {
+  transition: stroke-dashoffset 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tick-mark {
+  transition: all 0.3s ease;
+}
+
+.counter-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.count-button-center {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  border: none;
+  color: var(--neutral-white);
+  font-family: 'Amiri', serif;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.count-button-center::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.circular-counter.animate .count-button-center::before {
+  width: 300px;
+  height: 300px;
+  transition: width 0s, height 0s;
+}
+
+.button-text {
+  font-size: 2rem;
+  font-weight: 700;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.count-display {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+.target-display {
+  font-size: 1.3rem;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.progress-info {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.progress-percentage {
+  font-size: 2.5rem;
+  font-weight: 700;
+  font-family: 'Amiri', serif;
+  line-height: 1;
+}
+
+.progress-label {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+  font-family: 'Amiri', serif;
+}
+
+.counter-controls {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  justify-content: center;
+}
+
+.control-btn {
+  padding: 12px 24px;
+  background: var(--bg-light);
+  border: 2px solid var(--neutral-gray);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: 'Amiri', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.control-btn:hover {
+  background: var(--primary-lighter);
+  border-color: var(--primary-main);
+  transform: translateY(-2px);
+}
+
+.completed-sets {
+  background: var(--secondary-lighter);
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+
+.completed-sets strong {
+  color: var(--secondary-main);
+  font-size: 1.3rem;
+}
+
+@media (max-width: 992px) {
+  .tasbih-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .dhikr-list-sidebar {
+    position: static;
+    max-width: 100%;
+  }
+  
+  .dhikr-list {
+    flex-direction: row;
+    overflow-x: auto;
+    max-height: none;
+  }
+  
+  .dhikr-item {
+    flex-shrink: 0;
+    min-width: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .tasbih-counter-section {
+    padding: 24px 16px;
+  }
+  
+  .dhikr-text {
+    font-size: 1.6rem;
+    line-height: 2.2;
+  }
+  
+  .circular-counter {
+    width: 280px;
+    height: 280px;
+  }
+  
+  .count-button-center {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .button-text {
+    font-size: 1.6rem;
+  }
+  
+  .count-display {
+    font-size: 3rem;
+  }
+  
+  .target-display {
+    font-size: 1.1rem;
+  }
+  
+  .counter-controls {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .tasbih-page {
+    padding: 20px 0;
+  }
+  
+  .dhikr-text {
+    font-size: 1.3rem;
+    line-height: 2;
+    padding: 16px;
+  }
+  
+  .circular-counter {
+    width: 240px;
+    height: 240px;
+  }
+  
+  .circular-counter svg {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .count-button-center {
+    width: 160px;
+    height: 160px;
+  }
+  
+  .button-text {
+    font-size: 1.4rem;
+  }
+  
+  .count-display {
+    font-size: 2.5rem;
+  }
+  
+  .target-display {
+    font-size: 1rem;
+  }
+  
+  .categories-selector {
+    flex-wrap: nowrap;
+    gap: 8px;
+  }
+  
+  .category-tab {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+  
+  .category-tab span:first-child {
+    font-size: 1.2rem;
+  }
+}

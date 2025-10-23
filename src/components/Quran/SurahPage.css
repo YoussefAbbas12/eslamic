@@ -1,0 +1,523 @@
+.surah-page {
+  padding: 24px 0 60px;
+  min-height: 100vh;
+}
+
+.surah-header {
+  margin-bottom: 32px;
+}
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary-main);
+  font-size: 1.1rem;
+  margin-bottom: 24px;
+  transition: all var(--transition-fast);
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+.back-button:hover {
+  background: var(--primary-lighter);
+  transform: translateX(4px);
+}
+
+.surah-info-header {
+  background: linear-gradient(135deg, var(--primary-main) 0%, var(--primary-light) 100%);
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg);
+  color: var(--neutral-white);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.surah-number-badge {
+  width: 80px;
+  height: 80px;
+  background: var(--neutral-white);
+  color: var(--primary-main);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-md);
+}
+
+.surah-info-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+  color: var(--neutral-white);
+}
+
+.surah-english-name {
+  font-size: 1.2rem;
+  opacity: 0.95;
+  margin-bottom: 12px;
+}
+
+.surah-meta-info {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.meta-badge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+}
+
+.bismillah-container {
+  text-align: center;
+  margin: 40px 0;
+  padding: 32px;
+  background: linear-gradient(135deg, var(--bg-light-green) 0%, var(--bg-cream) 100%);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.bismillah-text {
+  font-family: 'Amiri Quran', serif;
+  font-size: 2.5rem;
+  color: var(--primary-main);
+  margin: 0;
+  line-height: 2;
+}
+
+.ayahs-container {
+  background: var(--bg-white);
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 32px;
+}
+
+.ayah-item {
+  padding: 24px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  transition: all var(--transition-normal);
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.ayah-item:hover {
+  background: var(--primary-lighter);
+  border-color: var(--primary-light);
+  transform: translateX(-4px);
+}
+
+.ayah-item.selected {
+  background: var(--primary-lighter);
+  border-color: var(--primary-main);
+  box-shadow: var(--shadow-md);
+}
+
+.ayah-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.ayah-text {
+  flex: 1;
+  line-height: 2.5;
+  font-size: 2rem;
+}
+
+.ayah-number-badge {
+  font-size: 1.8rem;
+  color: var(--secondary-main);
+  font-weight: 700;
+  flex-shrink: 0;
+  font-family: 'Amiri Quran', serif;
+}
+
+.ayah-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-top: 12px;
+  border-top: 2px solid var(--neutral-gray);
+  animation: slideDown var(--transition-normal);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 100px;
+  }
+}
+
+.action-btn {
+  background: var(--primary-main);
+  color: var(--neutral-white);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-family: 'Amiri', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all var(--transition-fast);
+}
+
+.action-btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.action-btn span {
+  font-size: 1.2rem;
+}
+
+.surah-footer {
+  margin-top: 40px;
+}
+
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.error-message {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.error-icon {
+  font-size: 4rem;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.error-message h2 {
+  color: var(--text-primary);
+  margin-bottom: 24px;
+}
+
+@media (max-width: 768px) {
+  .surah-info-header {
+    flex-direction: column;
+    text-align: center;
+    padding: 24px;
+  }
+  
+  .surah-info-header h1 {
+    font-size: 2rem;
+  }
+  
+  .surah-number-badge {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+  
+  .bismillah-text {
+    font-size: 2rem;
+  }
+  
+  .ayahs-container {
+    padding: 24px 16px;
+  }
+  
+  .ayah-text {
+    font-size: 1.6rem;
+    line-height: 2.2;
+  }
+  
+  .ayah-number-badge {
+    font-size: 1.5rem;
+  }
+  
+  .ayah-actions {
+    justify-content: center;
+  }
+  
+  .action-btn {
+    flex: 1;
+    min-width: 100px;
+    justify-content: center;
+  }
+  
+  .navigation-buttons {
+    flex-direction: column;
+  }
+}
+
+.surah-controls {
+  text-align: center;
+  margin: 32px 0;
+  padding: 24px;
+  background: var(--primary-lighter);
+  border-radius: 16px;
+}
+
+.play-surah-btn {
+  background: var(--primary-main);
+  color: var(--neutral-white);
+  border: none;
+  padding: 16px 40px;
+  border-radius: 12px;
+  font-family: 'Amiri', serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-md);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.play-surah-btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.stop-btn {
+  background: #f44336;
+}
+
+.stop-btn:hover {
+  background: #d32f2f;
+}
+
+.stop-btn-small {
+  background: #f44336;
+}
+
+.stop-btn-small:hover {
+  background: #d32f2f;
+}
+
+.continue-checkbox {
+  margin-top: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Amiri', serif;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+
+.continue-checkbox input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.continue-checkbox label {
+  cursor: pointer;
+  user-select: none;
+}
+
+.tafsir-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.tafsir-modal {
+  background: var(--bg-white);
+  border-radius: 20px;
+  max-width: 800px;
+  width: 100%;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.tafsir-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 32px;
+  border-bottom: 2px solid var(--neutral-gray);
+}
+
+.tafsir-modal-header h2 {
+  font-family: 'Amiri', serif;
+  color: var(--primary-main);
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.close-modal-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all var(--transition-fast);
+}
+
+.close-modal-btn:hover {
+  background: var(--neutral-gray);
+  color: var(--text-primary);
+}
+
+.tafsir-modal-content {
+  padding: 32px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.tafsir-modal-content p {
+  font-family: 'Amiri', serif;
+  font-size: 1.4rem;
+  line-height: 2.2;
+  color: var(--text-primary);
+  text-align: right;
+  margin: 0;
+}
+
+.tafsir-modal-footer {
+  padding: 20px 32px;
+  border-top: 2px solid var(--neutral-gray);
+  text-align: center;
+}
+
+.modal-action-btn {
+  background: var(--primary-main);
+  color: var(--neutral-white);
+  border: none;
+  padding: 12px 40px;
+  border-radius: 12px;
+  font-family: 'Amiri', serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.modal-action-btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 768px) {
+  .tafsir-modal {
+    max-height: 90vh;
+  }
+  
+  .tafsir-modal-header {
+    padding: 20px;
+  }
+  
+  .tafsir-modal-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .tafsir-modal-content {
+    padding: 24px 20px;
+  }
+  
+  .tafsir-modal-content p {
+    font-size: 1.2rem;
+    line-height: 2;
+  }
+  
+  .play-surah-btn {
+    padding: 14px 32px;
+    font-size: 1.1rem;
+  }
+  
+  .continue-checkbox {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .surah-info-header h1 {
+    font-size: 1.75rem;
+  }
+  
+  .bismillah-text {
+    font-size: 1.6rem;
+  }
+  
+  .ayah-text {
+    font-size: 1.4rem;
+    line-height: 2;
+  }
+  
+  .ayah-item {
+    padding: 16px;
+  }
+  
+  .action-btn {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+  
+  .tafsir-modal-content p {
+    font-size: 1.1rem;
+  }
+  
+  .play-surah-btn {
+    padding: 12px 24px;
+    font-size: 1rem;
+  }
+}
