@@ -34,6 +34,7 @@
   --bg-white: #FFFFFF;
   --bg-cream: #FFF8DC;
   --bg-light-green: #F0F7F0;
+  --bg-dark: #1B3A1C;
   
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.12);
@@ -74,6 +75,7 @@ body.dark-mode {
   --bg-white: #1E1E1E;
   --bg-cream: #2A2520;
   --bg-light-green: #1A2E1B;
+  --bg-dark: #0A0A0A;
   
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4);
@@ -333,4 +335,14 @@ svg circle{
 }
 .count{
   color: #dab265;
+}
+
+/* Footer link hover effects */
+footer a {
+  color: var(--text-light) !important;
+  transition: var(--transition-fast);
+}
+
+footer a:hover {
+  color: var(--secondary-light) !important;
 }

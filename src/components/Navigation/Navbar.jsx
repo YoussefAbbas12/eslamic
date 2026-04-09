@@ -12,16 +12,8 @@ function Navbar() {
     { path: '/', label: 'الرئيسية', icon: '🏠' },
     { path: '/today', label: 'اليوم', icon: '📅' },
     { path: '/quran', label: 'القرآن الكريم', icon: '📖' },
-    { path: '/quran-search', label: 'بحث القرآن', icon: '🔍' },
     { path: '/hadith', label: 'الأحاديث', icon: '📚' },
-    { path: '/duas', label: 'الأدعية', icon: '🤲' },
-    { path: '/prayer-times', label: 'مواقيت الصلاة', icon: '🕌' },
-    { path: '/tasbih', label: 'التسبيح', icon: '📿' },
-    { path: '/allah-names', label: 'أسماء الله', icon: '✨' },
-    { path: '/islamic-rulings', label: 'الأحكام الشرعية', icon: '⚖️' },
-    { path: '/quiz', label: 'الاختبار', icon: '🎯' },
-    { path: '/khatmah', label: 'الختمة', icon: '🕋' },
-    { path: '/stats', label: 'إحصائياتي', icon: '📊' }
+    { path: '/duas', label: 'الأدعية', icon: '🤲' }
   ];
 
   const isActive = (path) => location.pathname === path;
