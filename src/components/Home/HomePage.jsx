@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './HomePage.css';
 
 function HomePage() {
+  const [theme, setTheme] = useState(() => localStorage.getItem('homeTheme') || 'green');
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('homeTheme', theme);
+    } catch (e) {}
+  }, [theme]);
+
   const features = [
     {
       id: 1,
@@ -54,9 +62,25 @@ function HomePage() {
     }
   ];
 
+  const themeOptions = [
+    { id: 'green', label: 'Green & Blue (Calm & Spiritual)' },
+    { id: 'red', label: 'Red + White + Gold (Warm & Powerful)' },
+    { id: 'earth', label: 'Earth Tones (Beige + Brown)' },
+    { id: 'lux', label: 'Black + Gold + White (Luxury)' },
+    { id: 'pastel', label: 'Soft Pastel (Kids & Learning)' },
+    { id: 'orange', label: 'Orange + Cream + Dark Gray (Modern)' }
+  ];
+
   return (
-    <div className="homepage">
+    <div className={`homepage theme-${theme}`}>
       <section className="hero-section">
+        <div className="theme-selector">
+          <select value={theme} onChange={(e) => setTheme(e.target.value)} aria-label="Select theme">
+            {themeOptions.map(opt => (
+              <option key={opt.id} value={opt.id}>{opt.label}</option>
+            ))}
+          </select>
+        </div>
         <div className="hero-content">
           <div className="hero-decoration">
             <span className="decoration-icon">☪️</span>
@@ -88,9 +112,9 @@ function HomePage() {
                 className="feature-card"
                 style={{ '--delay': `${index * 0.1}s` }}
               >
-                <div 
+                <div
                   className="feature-card-bg"
-                  style={{ background: feature.gradient }}
+                  style={{ background: `linear-gradient(135deg, var(--primary-main) 0%, var(--secondary-main) 100%)` }}
                 ></div>
                 <div className="feature-content">
                   <div className="feature-icon">{feature.icon}</div>
