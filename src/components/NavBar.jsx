@@ -23,10 +23,11 @@ function BasicExample() {
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav className="me-auto gap-3">
-            <Nav.Link as={Link} to="/surah">قراءة القرآن</Nav.Link>
-            <Nav.Link as={Link} to="/taspeh">التسبيح</Nav.Link>
+            <Nav.Link as={Link} to="/">الرئيسية</Nav.Link>
+            <Nav.Link as={Link} to="/today">اليوم</Nav.Link>
+            <Nav.Link as={Link} to="/quran">القرآن الكريم</Nav.Link>
+            <Nav.Link as={Link} to="/hadith">الأحاديث</Nav.Link>
             <Nav.Link as={Link} to="/adia">الأدعية</Nav.Link>
-            <Nav.Link as={Link} to="/mwaket">مواقيت الصلاة</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

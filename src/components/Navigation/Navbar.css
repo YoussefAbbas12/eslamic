@@ -1,319 +1,351 @@
-.navbar {
-  background: var(--bg-white);
-  box-shadow: var(--shadow-md);
+/* ============================================================
+   Navbar — Premium Islamic Design
+   Matches: dark green header (#0e4c3d), gold active pill,
+   sticky top bar, mobile drawer.
+   ============================================================ */
+
+/* ── Variables (scoped to header) ──────────────────────────── */
+.nb-header {
+  --nb-green:       #0e4c3d;
+  --nb-green-light: #166e5a;
+  --nb-gold:        #d4af37;
+  --nb-gold-light:  #e8cc6a;
+  --nb-text:        #ffffff;
+  --nb-text-muted:  rgba(255, 255, 255, 0.75);
+  --nb-transition:  200ms ease-in-out;
+}
+
+/* ── Header shell ───────────────────────────────────────────── */
+.nb-header {
   position: sticky;
   top: 0;
   z-index: 1000;
-  border-bottom: 2px solid var(--primary-main);
+  background: var(--nb-green);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
 }
 
-.navbar-container {
+.nb-nav {
+  width: 100%;
+}
+
+/* ── Inner container ────────────────────────────────────────── */
+.nb-container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 1.25rem;
+  min-height: 60px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
-  min-height: 70px;
+  gap: 1rem;
+  direction: rtl;
 }
 
-.navbar-logo {
+/* ── Logo ───────────────────────────────────────────────────── */
+.nb-logo {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 0.6rem;
   text-decoration: none;
-  color: var(--primary-main);
-  font-size: clamp(1.2rem, 4vw, 1.5rem);
-  font-weight: 700;
-  transition: all var(--transition-fast);
-  flex-shrink: 0;
-}
-
-.navbar-logo:hover {
-  transform: scale(1.05);
-}
-
-.logo-icon {
-  font-size: clamp(1.5rem, 5vw, 2rem);
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-}
-
-.logo-text {
+  color: var(--nb-text);
   font-family: 'Amiri', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
   white-space: nowrap;
+  flex-shrink: 0;
+  transition: opacity var(--nb-transition);
 }
 
-.navbar-toggle {
-  display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 8px;
-  position: relative;
-  width: 40px;
-  height: 40px;
-  z-index: 1001;
+.nb-logo:hover {
+  opacity: 0.85;
 }
 
-.hamburger {
-  position: relative;
-  display: block;
-  width: 28px;
-  height: 3px;
-  background: var(--primary-main);
-  transition: all var(--transition-normal);
-  border-radius: 3px;
+
+
+.nb-logo-text {
+  font-family: 'Amiri', serif;
 }
 
-.hamburger::before,
-.hamburger::after {
-  content: '';
-  position: absolute;
-  width: 28px;
-  height: 3px;
-  background: var(--primary-main);
-  transition: all var(--transition-normal);
-  border-radius: 3px;
-}
-
-.hamburger::before {
-  transform: translateY(-8px);
-}
-
-.hamburger::after {
-  transform: translateY(8px);
-}
-
-.hamburger.open {
-  background: transparent;
-}
-
-.hamburger.open::before {
-  transform: rotate(45deg);
-}
-
-.hamburger.open::after {
-  transform: rotate(-45deg);
-}
-
-.navbar-menu {
+/* ── Desktop nav links list ─────────────────────────────────── */
+.nb-links {
   display: flex;
   align-items: center;
-  gap: 24px;
-}
-
-.navbar-links {
-  display: flex;
+  gap: 0.25rem;
   list-style: none;
-  gap: 6px;
   margin: 0;
   padding: 0;
-  flex-wrap: wrap;
-  align-items: center;
+  flex: 1;
+  justify-content: center;
 }
 
-.nav-link {
+.nb-link {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 10px 14px;
+  gap: 0.35rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 6px;
   text-decoration: none;
-  color: var(--text-primary);
+  color: var(--nb-text-muted);
+  font-size: 0.9rem;
   font-weight: 500;
-  border-radius: 8px;
-  transition: all var(--transition-fast);
-  font-size: 0.95rem;
   white-space: nowrap;
+  transition: all var(--nb-transition);
 }
 
-.nav-link:hover {
-  background: var(--primary-lighter);
-  color: var(--primary-main);
-  transform: translateY(-2px);
+.nb-link:hover {
+  color: var(--nb-text);
+  background: rgba(255, 255, 255, 0.1);
 }
 
-.nav-link.active {
-  background: var(--primary-main);
-  color: var(--text-light);
-  box-shadow: var(--shadow-sm);
+/* Active link — gold pill */
+.nb-link--active {
+  background: var(--nb-gold);
+  color: var(--nb-green) !important;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.4);
 }
 
-.nav-icon {
-  font-size: 1.2rem;
+.nb-link--active:hover {
+  background: var(--nb-gold-light);
+}
+
+
+
+/* ── Right-side controls ────────────────────────────────────── */
+.nb-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   flex-shrink: 0;
 }
 
-.nav-label {
-  font-size: 0.9rem;
-}
-
-.theme-toggle {
-  background: var(--bg-light);
-  border: 2px solid var(--neutral-gray);
+/* Theme toggle button */
+.nb-theme-btn {
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  width: 45px;
-  height: 45px;
+  border: 1.5px solid rgba(212, 175, 55, 0.5);
+  background: transparent;
+  color: var(--nb-gold);
+  font-size: 1.1rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all var(--transition-fast);
-  font-size: 1.3rem;
+  transition: all var(--nb-transition);
   flex-shrink: 0;
 }
 
-.theme-toggle:hover {
-  background: var(--primary-lighter);
-  border-color: var(--primary-main);
-  transform: rotate(15deg) scale(1.1);
+.nb-theme-btn:hover {
+  background: rgba(212, 175, 55, 0.15);
+  border-color: var(--nb-gold);
+  color: var(--nb-text);
 }
 
-@media (max-width: 1200px) {
-  .navbar-links {
-    gap: 4px;
-  }
-  
-  .nav-link {
-    padding: 8px 10px;
-    font-size: 0.85rem;
-  }
-  
-  .nav-label {
-    font-size: 0.85rem;
-  }
+.nb-theme-btn:focus-visible {
+  outline: 2px solid var(--nb-gold);
+  outline-offset: 2px;
 }
 
+/* ── Hamburger (mobile only) ────────────────────────────────── */
+.nb-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 0;
+  transition: background var(--nb-transition);
+}
+
+.nb-hamburger:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.nb-hamburger:focus-visible {
+  outline: 2px solid var(--nb-gold);
+  outline-offset: 2px;
+}
+
+.nb-bar {
+  display: block;
+  width: 22px;
+  height: 2.5px;
+  background: var(--nb-text);
+  border-radius: 2px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+}
+
+/* Animated X state */
+.nb-hamburger--open .nb-bar:nth-child(1) {
+  transform: translateY(7.5px) rotate(45deg);
+}
+.nb-hamburger--open .nb-bar:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.nb-hamburger--open .nb-bar:nth-child(3) {
+  transform: translateY(-7.5px) rotate(-45deg);
+}
+
+/* ============================================================
+   MOBILE DRAWER
+   ============================================================ */
+.nb-drawer {
+  display: none;
+}
+
+/* ── Responsive Breakpoints ─────────────────────────────────── */
+
+/* Medium (≤ 1024px): hide nav labels, show icons only */
 @media (max-width: 1024px) {
-  .navbar-container {
-    padding: 0 16px;
-  }
-  
-  .navbar-links {
-    gap: 2px;
-  }
-  
-  .nav-link {
-    padding: 8px;
-  }
-  
-  .nav-label {
+  .nb-link-label {
     display: none;
   }
-  
-  .nav-icon {
-    font-size: 1.4rem;
+
+  .nb-link {
+    padding: 0.5rem 0.65rem;
+  }
+
+  .nb-link-icon {
+    font-size: 1.2rem;
   }
 }
 
+/* Mobile (≤ 768px): hamburger + full-screen drawer */
 @media (max-width: 768px) {
-  .navbar-container {
-    padding: 0 12px;
-    min-height: 60px;
+  .nb-links {
+    display: none;
   }
 
-  .navbar-toggle {
-    display: block;
+  .nb-hamburger {
+    display: flex;
   }
-  
-  .navbar-menu {
+
+  /* ── Drawer overlay ── */
+  .nb-drawer {
+    display: block;
     position: fixed;
+    inset: 0;
+    z-index: 999;
+    pointer-events: none;
+    visibility: hidden;
+    transition: visibility 0s 0.3s;
+  }
+
+  .nb-drawer--open {
+    pointer-events: auto;
+    visibility: visible;
+    transition: visibility 0s 0s;
+  }
+
+  /* Dim backdrop */
+  .nb-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .nb-drawer--open .nb-backdrop {
+    opacity: 1;
+  }
+
+  /* Slide-in panel */
+  .nb-drawer-panel {
+    position: absolute;
     top: 60px;
     right: 0;
-    width: min(320px, 85vw);
+    width: min(300px, 85vw);
     height: calc(100vh - 60px);
-    background: var(--bg-white);
+    background: var(--nb-green);
+    border-left: 3px solid var(--nb-gold);
+    display: flex;
     flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    padding: 24px 0;
-    box-shadow: -4px 0 16px rgba(0, 0, 0, 0.15);
+    padding: 1.5rem 0;
     transform: translateX(100%);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     overflow-y: auto;
-    border-left: 3px solid var(--primary-main);
   }
-  
-  .navbar-menu.active {
+
+  .nb-drawer--open .nb-drawer-panel {
     transform: translateX(0);
   }
-  
-  .navbar-links {
-    flex-direction: column;
-    gap: 0;
-    width: 100%;
-    flex-wrap: nowrap;
+
+  /* Drawer links list */
+  .nb-drawer-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex: 1;
   }
-  
-  .navbar-links li {
-    width: 100%;
+
+  .nb-drawer-link {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 1rem 1.5rem;
+    text-decoration: none;
+    color: var(--nb-text-muted);
+    font-family: 'Amiri', serif;
+    font-size: 1.05rem;
+    font-weight: 500;
+    border-right: 3px solid transparent;
+    transition: all var(--nb-transition);
   }
-  
-  .nav-link {
-    width: 100%;
-    padding: 16px 24px;
-    border-radius: 0;
-    font-size: 1rem;
-    justify-content: flex-start;
-    gap: 12px;
+
+  .nb-drawer-link:hover {
+    color: var(--nb-text);
+    background: rgba(255, 255, 255, 0.08);
+    border-right-color: rgba(212, 175, 55, 0.5);
   }
-  
-  .nav-label {
-    display: inline;
-    font-size: 1rem;
+
+  .nb-drawer-link--active {
+    color: var(--nb-gold);
+    border-right-color: var(--nb-gold);
+    font-weight: 700;
+    background: rgba(212, 175, 55, 0.1);
   }
-  
-  .nav-icon {
-    font-size: 1.3rem;
+
+  /* Theme button inside drawer */
+  .nb-theme-btn--drawer {
+    width: auto;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    padding: 0.7rem 1.5rem;
+    margin: 1rem 1.5rem 0;
+    font-size: 0.95rem;
+    gap: 0.5rem;
+    font-family: 'Amiri', serif;
+    color: var(--nb-gold);
   }
-  
-  .nav-link:hover {
-    transform: none;
-    padding-right: 28px;
-  }
-  
-  .nav-link.active {
-    border-right: 4px solid var(--primary-main);
-    background: var(--primary-lighter);
-    color: var(--primary-main);
-  }
-  
-  .theme-toggle {
-    margin: 24px auto 0;
-    width: 50px;
-    height: 50px;
-    font-size: 1.5rem;
+
+  .nb-theme-btn--drawer:hover {
+    background: rgba(212, 175, 55, 0.15);
+    color: var(--nb-text);
+    border-color: var(--nb-gold);
   }
 }
 
-@media (max-width: 480px) {
-  .logo-text {
-    font-size: 1rem;
+/* Very small screens */
+@media (max-width: 400px) {
+  .nb-logo-text {
+    font-size: 0.95rem;
   }
-  
-  .logo-icon {
-    font-size: 1.3rem;
-  }
-  
-  .navbar-menu {
-    width: 100%;
-    top: 60px;
-  }
-  
-  .navbar-container {
-    min-height: 55px;
-  }
-}
 
-@media (max-width: 360px) {
-  .navbar-container {
-    padding: 0 8px;
-  }
-  
-  .navbar-logo {
-    gap: 8px;
-  }
-  
-  .logo-text {
-    font-size: 0.9rem;
+  .nb-logo-icon {
+    width: 30px;
+    height: 30px;
+    font-size: 1.3rem;
   }
 }

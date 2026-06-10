@@ -1,309 +1,757 @@
-.hadith-page {
+/* ============================================================
+   HadithPage — Premium Islamic Portal Design
+   Design tokens scoped to this page to avoid global pollution.
+   ============================================================ */
+
+/* ── Design Tokens ─────────────────────────────────────────── */
+.hp-page {
+  --hp-green:        #0e4c3d;
+  --hp-green-light:  #166e5a;
+  --hp-green-hover:  #0a3a2e;
+  --hp-gold:         #d4af37;
+  --hp-gold-light:   #e8cc6a;
+  --hp-bg:           #fdfaf6;
+  --hp-card-bg:      #fcfbfa;
+  --hp-card-border:  #e5e1d8;
+  --hp-text-dark:    #1a1a1a;
+  --hp-text-muted:   #5c5c5c;
+  --hp-text-light:   #ffffff;
+  --hp-shadow-sm:    0 2px 4px rgba(0, 0, 0, 0.06);
+  --hp-shadow-md:    0 4px 12px rgba(0, 0, 0, 0.08);
+  --hp-shadow-lg:    0 8px 24px rgba(0, 0, 0, 0.12);
+  --hp-shadow-islamic:
+    0 4px 6px -1px rgba(0, 0, 0, 0.05),
+    0 2px 4px -1px rgba(0, 0, 0, 0.03),
+    inset 0 0 0 1px var(--hp-card-border);
+  --hp-radius-sm:    8px;
+  --hp-radius-md:    12px;
+  --hp-radius-lg:    16px;
+  --hp-radius-xl:    24px;
+  --hp-transition:   200ms ease-in-out;
+}
+
+/* ── Page Shell ─────────────────────────────────────────────── */
+.hp-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e8f0f7 100%);
-  padding: 2rem 0;
+  background-color: var(--hp-bg);
+  /* Subtle warm texture pattern */
+  background-image:
+    radial-gradient(ellipse at 20% 0%, rgba(14, 76, 61, 0.04) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 100%, rgba(212, 175, 55, 0.05) 0%, transparent 60%),
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 18px,
+      rgba(212, 175, 55, 0.03) 18px,
+      rgba(212, 175, 55, 0.03) 19px
+    );
+  padding-bottom: 4rem;
 }
 
-.hadith-content-wrapper {
-  display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-.categories-sidebar {
-  background: white;
-  border-radius: 16px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  height: fit-content;
-  position: sticky;
-  top: 2rem;
-}
-
-.categories-sidebar h3 {
-  font-family: 'Amiri', serif;
-  font-size: 1.3rem;
-  color: #2C5F2D;
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid #e0e0e0;
-}
-
-.categories-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.category-item {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.875rem;
-  background: #f8f9fa;
-  border: 2px solid transparent;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: 'Amiri', serif;
-  font-size: 1rem;
-  text-align: right;
+.hp-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
   width: 100%;
 }
 
-.category-item:hover {
-  background: #e8f5e9;
-  border-color: #4CAF50;
-  transform: translateX(-4px);
+/* ── Screen-reader-only utility ─────────────────────────────── */
+.hp-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-.category-item.active {
-  background: linear-gradient(135deg, #2C5F2D 0%, #4CAF50 100%);
-  color: white;
-  border-color: #2C5F2D;
-  box-shadow: 0 4px 12px rgba(44, 95, 45, 0.3);
-}
-
-.category-icon {
-  font-size: 1.5rem;
-}
-
-.category-name {
-  flex: 1;
-  font-weight: 600;
-}
-
-.hadith-count {
-  background: rgba(255, 255, 255, 0.3);
-  padding: 0.25rem 0.5rem;
-  border-radius: 12px;
-  font-size: 0.875rem;
-  font-weight: bold;
-}
-
-.category-item.active .hadith-count {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.hadiths-content {
-  background: white;
-  border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.category-header {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 2px solid #e0e0e0;
-}
-
-.category-header-icon {
-  font-size: 2.5rem;
-}
-
-.category-header h2 {
-  font-family: 'Amiri', serif;
-  color: #2C5F2D;
-  font-size: 2rem;
-  margin: 0;
-  flex: 1;
-}
-
-.hadiths-count {
-  color: #666;
-  font-size: 0.95rem;
-  background: #f0f0f0;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-}
-
-.hadiths-grid {
+/* ============================================================
+   HERO SECTION
+   ============================================================ */
+.hp-hero {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-}
-
-.hadith-card {
-  background: #f9f9f9;
-  border: 2px solid #e0e0e0;
-  border-radius: 16px;
-  padding: 1.5rem;
-  transition: all 0.3s ease;
-}
-
-.hadith-card:hover {
-  border-color: #2C5F2D;
-  box-shadow: 0 4px 12px rgba(44, 95, 45, 0.15);
-  transform: translateY(-2px);
-}
-
-.hadith-card-header {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  padding: 2.5rem 1rem 0;
+  text-align: center;
 }
 
-.hadith-topic {
+/* ── Search Bar ─────────────────────────────────────────────── */
+.hp-search-wrapper {
+  width: 100%;
+  max-width: 700px;
+  margin-bottom: 2.5rem;
+  position: relative;
+  z-index: 10;
+}
+
+.hp-search-bar {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-family: 'Amiri', serif;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #2C5F2D;
+  background: var(--hp-green);
+  border-radius: 50px;
+  padding: 0.3rem;
+  box-shadow: 0 4px 20px rgba(14, 76, 61, 0.35);
+  border: 1px solid var(--hp-green-light);
+  transition: box-shadow var(--hp-transition);
 }
 
-.topic-icon {
-  font-size: 1.2rem;
+.hp-search-bar:focus-within {
+  box-shadow: 0 4px 24px rgba(14, 76, 61, 0.5), 0 0 0 3px rgba(212, 175, 55, 0.3);
 }
 
-.expand-btn {
-  width: 32px;
-  height: 32px;
+.hp-search-icon-btn {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  border: 2px solid #2C5F2D;
-  background: white;
-  color: #2C5F2D;
-  font-size: 1.5rem;
+  border: none;
+  background: rgba(212, 175, 55, 0.2);
+  color: var(--hp-gold);
+  font-size: 1.1rem;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  line-height: 1;
+  margin: 0.2rem;
+  transition: background var(--hp-transition);
 }
 
-.expand-btn:hover {
-  background: #2C5F2D;
-  color: white;
-  transform: rotate(90deg);
+.hp-search-icon-btn:hover {
+  background: rgba(212, 175, 55, 0.35);
 }
 
-.hadith-content {
-  max-height: 80px;
-  overflow: hidden;
-  transition: max-height 0.4s ease;
-}
-
-.hadith-content.expanded {
-  max-height: 1000px;
-}
-
-.hadith-arabic {
-  font-family: 'Amiri', serif;
-  font-size: 1.3rem;
-  line-height: 2;
-  color: #333;
-  margin-bottom: 1rem;
-  text-align: justify;
+.hp-search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--hp-text-light);
+  font-family: 'Tajawal', 'Amiri', sans-serif;
+  font-size: 1.05rem;
+  padding: 0.75rem 1rem;
+  text-align: center;
   direction: rtl;
 }
 
-.hadith-meta {
-  background: white;
-  border-radius: 12px;
-  padding: 1rem;
-  margin-top: 1rem;
+.hp-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* ── Hero Title ─────────────────────────────────────────────── */
+.hp-hero-title {
+  font-family: 'Amiri', serif;
+  font-size: clamp(2.8rem, 8vw, 5.5rem);
+  font-weight: 700;
+  color: var(--hp-green);
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 8px rgba(14, 76, 61, 0.1);
+  /* Subtle inner decoration using text-stroke effect */
+  -webkit-text-stroke: 0.5px rgba(14, 76, 61, 0.15);
+}
+
+.hp-hero-subtitle {
+  font-family: 'Amiri', sans-serif;
+  font-size: 1.05rem;
+  color: var(--hp-text-muted);
+  margin-bottom: 3rem;
+  max-width: 480px;
+  line-height: 1.7;
+}
+
+/* ============================================================
+   TWO-COLUMN LAYOUT
+   ============================================================ */
+.hp-layout {
+  display: grid;
+  /* Content on left (3/4), sidebar on right (1/4) */
+  grid-template-columns: 1fr 280px;
+  grid-template-areas: "content sidebar";
+  gap: 2rem;
+  align-items: start;
+}
+
+/* ── Content Column ─────────────────────────────────────────── */
+.hp-content-col {
+  grid-area: content;
+  position: relative;
+}
+
+.hp-panel {
+  background: #ffffff;
+  border-radius: var(--hp-radius-xl);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(229, 225, 216, 0.6);
+  padding: 1.5rem;
+  padding-top: 3.5rem; /* space for floating banner */
+  position: relative;
+}
+
+/* ── Floating Category Banner ───────────────────────────────── */
+.hp-category-banner {
+  background: linear-gradient(135deg, var(--hp-green) 0%, var(--hp-green-light) 100%);
+  color: var(--hp-text-light);
+  border-radius: var(--hp-radius-md);
+  padding: 1rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* Float above the panel */
+  position: absolute;
+  top: -1.1rem;
+  right: 1rem;
+  left: 1rem;
+  z-index: 5;
+  box-shadow: 0 4px 16px rgba(14, 76, 61, 0.3);
+}
+
+.hp-banner-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: 'Amiri', serif;
+}
+
+.hp-banner-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--hp-text-light);
+  margin: 0;
+}
+
+.hp-banner-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.hp-banner-count-badge {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--hp-text-light);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  white-space: nowrap;
+}
+
+/* ── Hadiths List ───────────────────────────────────────────── */
+.hp-hadiths-list {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  border-left: 4px solid #2C5F2D;
-}
-
-.meta-item {
-  font-family: 'Amiri', serif;
-  font-size: 1rem;
-  color: #555;
-}
-
-.meta-item strong {
-  color: #2C5F2D;
-  margin-left: 0.5rem;
-}
-
-.hadith-actions {
-  display: flex;
   gap: 1rem;
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid #e0e0e0;
+  margin-top: 0.5rem;
 }
 
-.action-btn {
-  flex: 1;
-  padding: 0.75rem;
-  border: 2px solid #2C5F2D;
-  background: white;
-  color: #2C5F2D;
-  border-radius: 12px;
+/* ============================================================
+   HADITH CARD
+   ============================================================ */
+.hp-hadith-card {
+  background: var(--hp-card-bg);
+  border-radius: var(--hp-radius-lg);
+  padding: 1.25rem 1.5rem;
+  box-shadow: var(--hp-shadow-islamic);
+  transition: box-shadow var(--hp-transition), transform var(--hp-transition);
+}
+
+.hp-hadith-card:hover {
+  box-shadow:
+    0 6px 16px rgba(14, 76, 61, 0.1),
+    inset 0 0 0 1px rgba(14, 76, 61, 0.15);
+  transform: translateY(-1px);
+}
+
+/* ── Card Header ────────────────────────────────────────────── */
+.hp-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.hp-topic-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   font-family: 'Amiri', serif;
+  font-weight: 700;
+  color: var(--hp-green);
   font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
+}
+
+.hp-topic-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--hp-green);
+  margin: 0;
+  font-family: 'Amiri', serif;
+}
+
+/* ── Expand Button ──────────────────────────────────────────── */
+.hp-expand-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(14, 76, 61, 0.3);
+  background: transparent;
+  color: rgba(100, 130, 100, 0.7);
+  font-size: 1.25rem;
+  line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  transition: all var(--hp-transition);
+  flex-shrink: 0;
+}
+
+.hp-expand-btn:hover {
+  background: var(--hp-green);
+  border-color: var(--hp-green);
+  color: var(--hp-text-light);
+}
+
+.hp-expand-btn:focus-visible {
+  outline: 2px solid var(--hp-gold);
+  outline-offset: 2px;
+}
+
+/* ── Collapsible Body ───────────────────────────────────────── */
+.hp-card-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  opacity: 0;
+}
+
+.hp-card-body--expanded {
+  max-height: 1000px;
+  opacity: 1;
+  margin-top: 1.25rem;
+}
+
+/* ── Arabic Hadith Text ─────────────────────────────────────── */
+.hp-arabic-text {
+  font-family: 'Amiri', serif;
+  font-size: 1.2rem;
+  line-height: 2;
+  color: #374151;
+  text-align: right;
+  direction: rtl;
+  margin-bottom: 0;
+}
+
+/* ── Gold Divider ───────────────────────────────────────────── */
+.hp-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1.25rem 0;
+  opacity: 0.65;
+}
+
+.hp-divider::before,
+.hp-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to var(--hp-divider-dir, right), transparent, var(--hp-gold) 50%);
+}
+
+.hp-divider::before {
+  --hp-divider-dir: left;
+  background: linear-gradient(to left, transparent, var(--hp-gold) 50%);
+}
+
+.hp-divider::after {
+  background: linear-gradient(to right, transparent, var(--hp-gold) 50%);
+}
+
+.hp-divider-ornament {
+  padding: 0 0.75rem;
+  color: var(--hp-gold);
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+/* ── Metadata Block ─────────────────────────────────────────── */
+.hp-meta-block {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: var(--hp-radius-sm);
+  padding: 0.6rem 1rem;
+  border-inline-start: 3px solid var(--hp-green);
+  font-family: 'Amiri', serif;
+  font-size: 0.95rem;
+  color: var(--hp-text-muted);
+  margin-bottom: 1rem;
+}
+
+.hp-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.hp-meta-label {
+  color: var(--hp-green);
+  font-weight: 700;
+}
+
+.hp-meta-separator {
+  color: var(--hp-card-border);
+  font-size: 1.2rem;
+}
+
+/* ── Action Buttons ─────────────────────────────────────────── */
+.hp-actions {
+  display: flex;
+  gap: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--hp-card-border);
+}
+
+.hp-action-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1rem;
+  border: 1.5px solid var(--hp-card-border);
+  border-radius: var(--hp-radius-sm);
+  background: #ffffff;
+  color: var(--hp-green);
+  font-family: 'Amiri', serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--hp-transition);
+}
+
+.hp-action-btn:hover {
+  background: var(--hp-green);
+  border-color: var(--hp-green);
+  color: var(--hp-text-light);
+  box-shadow: 0 3px 10px rgba(14, 76, 61, 0.25);
+  transform: translateY(-1px);
+}
+
+.hp-action-btn:focus-visible {
+  outline: 2px solid var(--hp-gold);
+  outline-offset: 2px;
+}
+
+/* ── Empty State ────────────────────────────────────────────── */
+.hp-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3.5rem 2rem;
+  text-align: center;
+}
+
+.hp-empty-icon {
+  font-size: 3.5rem;
+  display: block;
+  margin-bottom: 1rem;
+  opacity: 0.4;
+}
+
+.hp-empty-text {
+  font-family: 'Amiri', serif;
+  font-size: 1.2rem;
+  color: var(--hp-text-muted);
+  margin: 0;
+}
+
+/* ── Copy Toast ─────────────────────────────────────────────── */
+.hp-toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 50%;
+  transform: translateX(50%);
+  background: var(--hp-green);
+  color: var(--hp-text-light);
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  font-family: 'Amiri', serif;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 16px rgba(14, 76, 61, 0.4);
+  z-index: 9999;
+  animation: hp-toast-in 0.25s ease-out;
+}
+
+@keyframes hp-toast-in {
+  from { opacity: 0; transform: translateX(50%) translateY(10px); }
+  to   { opacity: 1; transform: translateX(50%) translateY(0); }
+}
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+.hp-sidebar {
+  grid-area: sidebar;
+  position: sticky;
+  top: 1.5rem;
+}
+
+.hp-sidebar-panel {
+  background: #ffffff;
+  border-radius: var(--hp-radius-xl);
+  padding: 1.25rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(229, 225, 216, 0.6);
+}
+
+.hp-sidebar-title {
+  font-family: 'Amiri', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--hp-text-muted);
+  text-align: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--hp-card-border);
+}
+
+.hp-categories-list {
+  display: flex;
+  flex-direction: column;
   gap: 0.5rem;
 }
 
-.action-btn:hover {
-  background: #2C5F2D;
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(44, 95, 45, 0.3);
-}
-
-.no-results {
-  text-align: center;
-  padding: 3rem;
-  color: #666;
-}
-
-.no-results-icon {
-  font-size: 4rem;
-  display: block;
-  margin-bottom: 1rem;
-  opacity: 0.5;
-}
-
-.no-results p {
+/* ── Category Button ────────────────────────────────────────── */
+.hp-category-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: var(--hp-radius-md);
+  border: 1px solid var(--hp-card-border);
+  background: var(--hp-card-bg);
+  color: #374151;
   font-family: 'Amiri', serif;
-  font-size: 1.3rem;
+  font-size: 0.95rem;
+  text-align: right;
+  cursor: pointer;
+  transition: all var(--hp-transition);
+  line-height: 1.3;
 }
 
-@media (max-width: 968px) {
-  .hadith-content-wrapper {
+.hp-category-btn:hover {
+  border-color: var(--hp-green);
+  color: var(--hp-green);
+  background: rgba(14, 76, 61, 0.04);
+}
+
+.hp-category-btn:focus-visible {
+  outline: 2px solid var(--hp-gold);
+  outline-offset: 2px;
+}
+
+/* Active state */
+.hp-category-btn--active {
+  background: linear-gradient(135deg, var(--hp-green) 0%, var(--hp-green-light) 100%);
+  border-color: transparent;
+  color: var(--hp-text-light);
+  box-shadow: 0 4px 12px rgba(14, 76, 61, 0.3);
+}
+
+.hp-category-btn--active:hover {
+  background: linear-gradient(135deg, var(--hp-green-hover) 0%, var(--hp-green) 100%);
+  color: var(--hp-text-light);
+}
+
+/* Category count badge */
+.hp-category-count {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: #e5e7eb;
+  color: #6b7280;
+  transition: all var(--hp-transition);
+}
+
+.hp-category-btn:hover .hp-category-count {
+  background: rgba(14, 76, 61, 0.1);
+  color: var(--hp-green);
+}
+
+.hp-category-count--active {
+  background: rgba(255, 255, 255, 0.25);
+  color: var(--hp-text-light);
+}
+
+.hp-category-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.hp-category-name {
+  font-weight: 600;
+}
+
+.hp-category-icon {
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.hp-sidebar-empty {
+  text-align: center;
+  color: var(--hp-text-muted);
+  font-family: 'Amiri', serif;
+  font-size: 0.95rem;
+  padding: 1rem 0;
+  margin: 0;
+}
+
+/* ============================================================
+   RESPONSIVE DESIGN
+   ============================================================ */
+
+/* ── Tablet (≤ 1024px): sidebar moves on top ── */
+@media (max-width: 1024px) {
+  .hp-layout {
     grid-template-columns: 1fr;
+    grid-template-areas:
+      "sidebar"
+      "content";
   }
 
-  .categories-sidebar {
+  .hp-sidebar {
     position: static;
   }
 
-  .categories-list {
+  .hp-categories-list {
     flex-direction: row;
+    flex-wrap: nowrap;
     overflow-x: auto;
     padding-bottom: 0.5rem;
+    gap: 0.5rem;
+    /* Smooth scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: var(--hp-green) transparent;
   }
 
-  .category-item {
-    flex-direction: column;
-    min-width: 120px;
+  .hp-categories-list::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .hp-categories-list::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .hp-categories-list::-webkit-scrollbar-thumb {
+    background: var(--hp-green);
+    border-radius: 2px;
+  }
+
+  .hp-category-btn {
+    min-width: 130px;
+    flex-direction: column-reverse;
+    align-items: center;
     text-align: center;
+    padding: 0.75rem 0.6rem;
+    gap: 0.35rem;
   }
 
-  .hadith-arabic {
+  .hp-category-info {
+    flex-direction: column-reverse;
+    gap: 0.2rem;
+    justify-content: center;
+  }
+
+  .hp-category-count {
+    display: none; /* de-clutter on mobile pill view */
+  }
+}
+
+/* ── Mobile (≤ 640px) ── */
+@media (max-width: 640px) {
+  .hp-hero {
+    padding-top: 1.5rem;
+  }
+
+  .hp-hero-title {
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+
+  .hp-hero-subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+  }
+
+  .hp-search-wrapper {
+    margin-bottom: 1.5rem;
+  }
+
+  .hp-panel {
+    border-radius: var(--hp-radius-lg);
+    padding: 1rem;
+    padding-top: 3.5rem;
+  }
+
+  .hp-category-banner {
+    padding: 0.8rem 1rem;
+    top: -0.9rem;
+    right: 0.5rem;
+    left: 0.5rem;
+  }
+
+  .hp-banner-name {
+    font-size: 1rem;
+  }
+
+  .hp-arabic-text {
     font-size: 1.1rem;
+    line-height: 1.9;
   }
 
-  .hadith-actions {
+  .hp-actions {
     flex-direction: column;
+  }
+
+  .hp-meta-block {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+
+  .hp-meta-separator {
+    display: none;
+  }
+}
+
+/* ── Large screens (≥ 1400px) ── */
+@media (min-width: 1400px) {
+  .hp-layout {
+    grid-template-columns: 1fr 300px;
   }
 }

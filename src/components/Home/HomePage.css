@@ -1,5 +1,22 @@
 .homepage {
   min-height: 100vh;
+  /* Default palette (green + blue + white + gold) fallback */
+  --primary-dark: #2E7D32;
+  --primary-main: #43A047;
+  --primary-light: #A5D6A7;
+  --primary-lighter: #E8F5E9;
+
+  --secondary-main: #1565C0;
+  --secondary-lighter: #5E92F3;
+
+  --neutral-white: #FFFFFF;
+  --bg-white: var(--neutral-white);
+  --bg-light: #F6FBF6;
+  --bg-light-green: #E8F5E9;
+  --bg-cream: #FFF8E1;
+
+  --text-primary: #0e3a2a;
+  --text-secondary: rgba(0, 0, 0, 0.6);
 }
 
 .hero-section {
@@ -372,4 +389,97 @@
   .stat-label {
     font-size: 1rem;
   }
+}
+
+/* Theme selector styling */
+.theme-selector {
+  position: absolute;
+  top: 16px;
+  right: 24px;
+  z-index: 2;
+}
+
+.theme-selector select {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: var(--bg-white);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+}
+
+/* Theme variants */
+.homepage.theme-red {
+  --primary-dark: #B71C1C;
+  --primary-main: #D32F2F;
+  --primary-light: #FFCDD2;
+  --primary-lighter: #FFEBEE;
+  --secondary-main: #D4AF37;
+  --secondary-lighter: #F1C27D;
+  --neutral-white: #FFFFFF;
+  --bg-white: #FFFFFF;
+  --bg-light: #FFF5F5;
+  --bg-cream: #FFF8E1;
+  --text-primary: #4a0b0b;
+  --text-secondary: rgba(0,0,0,0.6);
+}
+
+.homepage.theme-earth {
+  --primary-dark: #4E342E;
+  --primary-main: #6D4C41;
+  --primary-light: #D7CCC8;
+  --primary-lighter: #EFEBE9;
+  --secondary-main: #A1887F;
+  --secondary-lighter: #CFC2B8;
+  --neutral-white: #FFFDF9;
+  --bg-white: #FFFDF9;
+  --bg-light: #FBF7F3;
+  --bg-cream: #FFF8E1;
+  --text-primary: #3E2723;
+  --text-secondary: rgba(0,0,0,0.6);
+}
+
+.homepage.theme-lux {
+  --primary-dark: #000000;
+  --primary-main: #000000;
+  --primary-light: #333333;
+  --primary-lighter: #555555;
+  --secondary-main: #D4AF37;
+  --secondary-lighter: #E6C966;
+  --neutral-white: #FFFFFF;
+  --bg-white: #FFFFFF;
+  --bg-light: #F7F7F7;
+  --bg-cream: #FFF8E1;
+  --text-primary: #111111;
+  --text-secondary: rgba(0,0,0,0.6);
+}
+
+.homepage.theme-pastel {
+  --primary-dark: #B388FF;
+  --primary-main: #F8BBD0;
+  --primary-light: #FCE4EC;
+  --primary-lighter: #FFF1F6;
+  --secondary-main: #A5D6A7;
+  --secondary-lighter: #C8E6C9;
+  --neutral-white: #FFFFFF;
+  --bg-white: #FFFFFF;
+  --bg-light: #FFF9FB;
+  --bg-cream: #FFF8E1;
+  --text-primary: #2e2e2e;
+  --text-secondary: rgba(0,0,0,0.6);
+}
+
+.homepage.theme-orange {
+  --primary-dark: #E65100;
+  --primary-main: #FB8C00;
+  --primary-light: #FFE0B2;
+  --primary-lighter: #FFF3E0;
+  --secondary-main: #424242;
+  --secondary-lighter: #616161;
+  --neutral-white: #FFFFFF;
+  --bg-white: #FFF8E1;
+  --bg-light: #FFF9F2;
+  --bg-cream: #FFF3E0;
+  --text-primary: #263238;
+  --text-secondary: rgba(0,0,0,0.6);
 }

@@ -1,159 +1,359 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import hadithsData from '../../data/hadiths.json';
 import './HadithPage.css';
 
-function HadithPage() {
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [expandedHadith, setExpandedHadith] = useState(null);
+// ─── Sub-components ──────────────────────────────────────────────────────────
 
+/**
+ * Decorative gold divider used between hadith items.
+ */
+const HadithDivider = React.memo(() => (
+  <div className="hp-divider" aria-hidden="true">
+    <span className="hp-divider-ornament">❧</span>
+  </div>
+));
+HadithDivider.displayName = 'HadithDivider';
+
+/**
+ * Single hadith card with expand/collapse toggle, copy and share actions.
+ */
+const HadithCard = React.memo(({ hadith, isExpanded, onToggle, onCopy, onShare }) => {
+  const cardId = `hadith-card-${hadith.id}`;
+  const contentId = `hadith-content-${hadith.id}`;
+
+  return (
+    <article
+      id={cardId}
+      className="hp-hadith-card"
+      aria-label={`حديث: ${hadith.topic}`}
+    >
+      {/* Card Header */}
+      <div className="hp-card-header">
+        {/* Expand / Collapse toggle — positioned on the start side (left in RTL) */}
+        <button
+          className="hp-expand-btn"
+          onClick={onToggle}
+          aria-expanded={isExpanded}
+          aria-controls={contentId}
+          aria-label={isExpanded ? `طي حديث ${hadith.topic}` : `توسيع حديث ${hadith.topic}`}
+        >
+          <span aria-hidden="true">{isExpanded ? '−' : '+'}</span>
+        </button>
+
+        {/* Topic badge — positioned on the end side (right in RTL) */}
+        <div className="hp-topic-badge">
+          <span aria-hidden="true">⭐</span>
+          <h3 className="hp-topic-name">{hadith.topic}</h3>
+        </div>
+      </div>
+
+      {/* Collapsible content */}
+      <div
+        id={contentId}
+        className={`hp-card-body ${isExpanded ? 'hp-card-body--expanded' : ''}`}
+        role="region"
+        aria-label={`نص حديث ${hadith.topic}`}
+      >
+        {/* Arabic hadith text */}
+        <p className="hp-arabic-text">{hadith.arabic}</p>
+
+        <HadithDivider />
+
+        {/* Narrator & Source metadata */}
+        <div className="hp-meta-block">
+          <span className="hp-meta-item">
+            <strong className="hp-meta-label">الراوي:</strong>
+            <span>{hadith.narrator}</span>
+          </span>
+          <span className="hp-meta-separator" aria-hidden="true">•</span>
+          <span className="hp-meta-item">
+            <strong className="hp-meta-label">المصدر:</strong>
+            <span>{hadith.source}</span>
+          </span>
+        </div>
+
+        {/* Action buttons */}
+        <div className="hp-actions" role="group" aria-label="إجراءات الحديث">
+          <button
+            className="hp-action-btn"
+            onClick={onCopy}
+            aria-label={`نسخ حديث: ${hadith.topic}`}
+          >
+            <span aria-hidden="true">📋</span>
+            <span>نسخ</span>
+          </button>
+          <button
+            className="hp-action-btn"
+            onClick={onShare}
+            aria-label={`مشاركة حديث: ${hadith.topic}`}
+          >
+            <span aria-hidden="true">🔗</span>
+            <span>مشاركة</span>
+          </button>
+        </div>
+      </div>
+    </article>
+  );
+});
+HadithCard.displayName = 'HadithCard';
+
+/**
+ * Single category button in the sidebar.
+ */
+const CategoryButton = React.memo(({ category, isActive, onClick }) => (
+  <button
+    className={`hp-category-btn ${isActive ? 'hp-category-btn--active' : ''}`}
+    onClick={onClick}
+    aria-pressed={isActive}
+    aria-label={`${category.name} — ${category.hadiths.length} حديث`}
+  >
+    {/* Count badge */}
+    <span className={`hp-category-count ${isActive ? 'hp-category-count--active' : ''}`}>
+      {category.hadiths.length}
+    </span>
+
+    {/* Name + Icon */}
+    <div className="hp-category-info">
+      <span className="hp-category-name">{category.name}</span>
+      <span className="hp-category-icon" aria-hidden="true">{category.icon}</span>
+    </div>
+  </button>
+));
+CategoryButton.displayName = 'CategoryButton';
+
+// ─── Main Page Component ──────────────────────────────────────────────────────
+
+function HadithPage() {
+  // ── State ──────────────────────────────────────────────────────────────────
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [searchTerm, setSearchTerm]             = useState('');
+  const [expandedHadith, setExpandedHadith]     = useState(null);
+  const [copyFeedback, setCopyFeedback]         = useState(null); // hadith id that was just copied
+
+  // Set default category on mount
   useEffect(() => {
     if (hadithsData.categories.length > 0) {
       setSelectedCategory(hadithsData.categories[0].id);
     }
   }, []);
 
-  const filteredCategories = hadithsData.categories.filter(category =>
-    category.name.includes(searchTerm) ||
-    category.hadiths.some(hadith =>
-      hadith.arabic.includes(searchTerm) ||
-      hadith.topic.includes(searchTerm) ||
-      hadith.narrator.includes(searchTerm)
-    )
+  // ── Derived data (memoised) ─────────────────────────────────────────────────
+  const filteredCategories = useMemo(
+    () =>
+      hadithsData.categories.filter(
+        (category) =>
+          category.name.includes(searchTerm) ||
+          category.hadiths.some(
+            (h) =>
+              h.arabic.includes(searchTerm) ||
+              h.topic.includes(searchTerm) ||
+              h.narrator.includes(searchTerm)
+          )
+      ),
+    [searchTerm]
   );
 
-  const currentCategory = filteredCategories.find(cat => cat.id === selectedCategory);
-
-  const filteredHadiths = currentCategory?.hadiths.filter(hadith =>
-    hadith.arabic.includes(searchTerm) ||
-    hadith.topic.includes(searchTerm) ||
-    hadith.narrator.includes(searchTerm)
+  const currentCategory = useMemo(
+    () => filteredCategories.find((cat) => cat.id === selectedCategory),
+    [filteredCategories, selectedCategory]
   );
 
-  const handleCopyHadith = (text) => {
-    navigator.clipboard.writeText(text);
-    alert('تم نسخ الحديث');
-  };
+  const filteredHadiths = useMemo(
+    () =>
+      currentCategory?.hadiths.filter(
+        (h) =>
+          h.arabic.includes(searchTerm) ||
+          h.topic.includes(searchTerm) ||
+          h.narrator.includes(searchTerm)
+      ),
+    [currentCategory, searchTerm]
+  );
 
-  const handleShareHadith = (text, topic) => {
-    if (navigator.share) {
-      navigator.share({
-        title: topic,
-        text: text
+  // ── Handlers (stable references via useCallback) ───────────────────────────
+  const handleCategorySelect = useCallback((id) => {
+    setSelectedCategory(id);
+    setExpandedHadith(null); // collapse any open card when switching category
+  }, []);
+
+  const handleToggleExpand = useCallback((hadithId) => {
+    setExpandedHadith((prev) => (prev === hadithId ? null : hadithId));
+  }, []);
+
+  const handleCopyHadith = useCallback(
+    (hadithId, text) => {
+      navigator.clipboard.writeText(text).catch(() => {
+        // Fallback for browsers that don't support clipboard API
+        const el = document.createElement('textarea');
+        el.value = text;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
       });
+      setCopyFeedback(hadithId);
+      setTimeout(() => setCopyFeedback(null), 2000);
+    },
+    []
+  );
+
+  const handleShareHadith = useCallback((text, topic) => {
+    if (navigator.share) {
+      navigator.share({ title: topic, text });
     } else {
-      handleCopyHadith(text);
+      // Fallback: copy to clipboard
+      navigator.clipboard.writeText(text).catch(() => null);
     }
-  };
+  }, []);
 
+  const handleSearchChange = useCallback((e) => {
+    setSearchTerm(e.target.value);
+    setExpandedHadith(null);
+  }, []);
+
+  // ── Render ─────────────────────────────────────────────────────────────────
   return (
-    <div className="hadith-page">
-      <div className="container">
-        <div className="page-header">
-          <h1>📚 الأحاديث النبوية</h1>
-          <p className="page-description">
-            مجموعة من الأحاديث النبوية الشريفة مصنفة حسب المواضيع
-          </p>
-        </div>
+    <main className="hp-page" role="main">
+      <div className="hp-container">
 
-        <div className="search-box">
-          <input
-            type="text"
-            placeholder="🔍 ابحث في الأحاديث..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="search-input"
-          />
-        </div>
-
-        <div className="hadith-content-wrapper">
-          <div className="categories-sidebar">
-            <h3>التصنيفات</h3>
-            <div className="categories-list">
-              {filteredCategories.map((category) => (
-                <button
-                  key={category.id}
-                  className={`category-item ${selectedCategory === category.id ? 'active' : ''}`}
-                  onClick={() => setSelectedCategory(category.id)}
-                >
-                  <span className="category-icon">{category.icon}</span>
-                  <span className="category-name">{category.name}</span>
-                  <span className="hadith-count">{category.hadiths.length}</span>
-                </button>
-              ))}
+        {/* ── Hero / Title ── */}
+        <section className="hp-hero" aria-label="عنوان صفحة الأحاديث النبوية">
+          {/* Search bar */}
+          <div className="hp-search-wrapper">
+            {/* Visually-hidden label for screen readers */}
+            <label htmlFor="hadith-search" className="hp-sr-only">
+              البحث في الأحاديث النبوية
+            </label>
+            <div className="hp-search-bar" role="search">
+              <button
+                className="hp-search-icon-btn"
+                aria-label="بحث"
+                tabIndex={-1}
+              >
+                <span aria-hidden="true">🔍</span>
+              </button>
+              <input
+                id="hadith-search"
+                type="search"
+                className="hp-search-input"
+                placeholder="ابحث في الأحاديث..."
+                value={searchTerm}
+                onChange={handleSearchChange}
+                autoComplete="off"
+                dir="rtl"
+              />
             </div>
           </div>
 
-          <div className="hadiths-content">
-            {currentCategory && (
-              <>
-                <div className="category-header">
-                  <span className="category-header-icon">{currentCategory.icon}</span>
-                  <h2>{currentCategory.name}</h2>
-                  <p className="hadiths-count">
-                    {filteredHadiths?.length || 0} حديث
-                  </p>
-                </div>
+          {/* Calligraphic page title */}
+          <h1 className="hp-hero-title" lang="ar">
+            الأحاديث النبوية
+          </h1>
+          <p className="hp-hero-subtitle">
+            مجموعة من الأحاديث النبوية الشريفة مصنفة حسب المواضيع
+          </p>
+        </section>
 
-                <div className="hadiths-grid">
-                  {filteredHadiths?.map((hadith) => (
-                    <div key={hadith.id} className="hadith-card">
-                      <div className="hadith-card-header">
-                        <div className="hadith-topic">
-                          <span className="topic-icon">📌</span>
-                          <span>{hadith.topic}</span>
-                        </div>
-                        <button
-                          className="expand-btn"
-                          onClick={() => setExpandedHadith(expandedHadith === hadith.id ? null : hadith.id)}
-                        >
-                          {expandedHadith === hadith.id ? '−' : '+'}
-                        </button>
-                      </div>
+        {/* ── Two-column layout: content (3/4) | sidebar (1/4) ── */}
+        <div className="hp-layout">
 
-                      <div className={`hadith-content ${expandedHadith === hadith.id ? 'expanded' : ''}`}>
-                        <p className="hadith-arabic">{hadith.arabic}</p>
-                        
-                        <div className="hadith-meta">
-                          <div className="meta-item">
-                            <strong>الراوي:</strong> {hadith.narrator}
-                          </div>
-                          <div className="meta-item">
-                            <strong>المصدر:</strong> {hadith.source}
-                          </div>
-                        </div>
+          {/* ── Hadiths Content Column ── */}
+          <section
+            className="hp-content-col"
+            aria-label="قائمة الأحاديث"
+          >
+            {currentCategory ? (
+              <div className="hp-panel">
+                {/* Floating category banner */}
+                <header className="hp-category-banner" aria-label="التصنيف الحالي">
+                  <div className="hp-banner-count-badge">
+                    <span>{filteredHadiths?.length ?? 0}</span>
+                    <span>أحاديث</span>
+                  </div>
+                  <div className="hp-banner-title">
+                    <h2 className="hp-banner-name">{currentCategory.name}</h2>
+                    <span className="hp-banner-icon" aria-hidden="true">
+                      {currentCategory.icon}
+                    </span>
+                  </div>
+                </header>
 
-                        <div className="hadith-actions">
-                          <button
-                            className="action-btn"
-                            onClick={() => handleCopyHadith(hadith.arabic)}
-                          >
-                            <span>📋</span> نسخ
-                          </button>
-                          <button
-                            className="action-btn"
-                            onClick={() => handleShareHadith(hadith.arabic, hadith.topic)}
-                          >
-                            <span>🔗</span> مشاركة
-                          </button>
-                        </div>
-                      </div>
+                {/* Hadith list */}
+                <div className="hp-hadiths-list">
+                  {filteredHadiths && filteredHadiths.length > 0 ? (
+                    filteredHadiths.map((hadith) => (
+                      <HadithCard
+                        key={`${currentCategory.id}-${hadith.id}`}
+                        hadith={hadith}
+                        isExpanded={expandedHadith === hadith.id}
+                        onToggle={() => handleToggleExpand(hadith.id)}
+                        onCopy={() => handleCopyHadith(hadith.id, hadith.arabic)}
+                        onShare={() => handleShareHadith(hadith.arabic, hadith.topic)}
+                      />
+                    ))
+                  ) : (
+                    /* Empty state */
+                    <div className="hp-empty-state" role="status" aria-live="polite">
+                      <span className="hp-empty-icon" aria-hidden="true">🔍</span>
+                      <p className="hp-empty-text">لا توجد أحاديث تطابق بحثك</p>
                     </div>
-                  ))}
+                  )}
                 </div>
 
-                {filteredHadiths?.length === 0 && (
-                  <div className="no-results">
-                    <span className="no-results-icon">🔍</span>
-                    <p>لا توجد أحاديث تطابق بحثك</p>
+                {/* Copy feedback toast */}
+                {copyFeedback && (
+                  <div
+                    className="hp-toast"
+                    role="status"
+                    aria-live="polite"
+                    aria-atomic="true"
+                  >
+                    <span aria-hidden="true">✅</span>
+                    تم نسخ الحديث
                   </div>
                 )}
-              </>
+              </div>
+            ) : (
+              /* No category matches search */
+              <div className="hp-panel hp-empty-state" role="status" aria-live="polite">
+                <span className="hp-empty-icon" aria-hidden="true">🔍</span>
+                <p className="hp-empty-text">لا توجد تصنيفات تطابق بحثك</p>
+              </div>
             )}
-          </div>
+          </section>
+
+          {/* ── Categories Sidebar ── */}
+          <aside
+            className="hp-sidebar"
+            aria-label="تصنيفات الأحاديث"
+          >
+            <div className="hp-sidebar-panel">
+              <h2 className="hp-sidebar-title">التصنيفات</h2>
+              <nav
+                className="hp-categories-list"
+                aria-label="قائمة التصنيفات"
+                role="navigation"
+              >
+                {filteredCategories.map((category) => (
+                  <CategoryButton
+                    key={category.id}
+                    category={category}
+                    isActive={selectedCategory === category.id}
+                    onClick={() => handleCategorySelect(category.id)}
+                  />
+                ))}
+
+                {filteredCategories.length === 0 && (
+                  <p className="hp-sidebar-empty" role="status">
+                    لا توجد تصنيفات
+                  </p>
+                )}
+              </nav>
+            </div>
+          </aside>
+
         </div>
       </div>
-    </div>
+    </main>
   );
 }
 

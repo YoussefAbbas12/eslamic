@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/Navigation/Navbar';
+import Footer from './components/Footer';
 import HomePage from './components/Home/HomePage';
 import TodayPage from './components/Today/TodayPage';
 import QuranList from './components/Quran/QuranList';
@@ -16,6 +17,9 @@ import IslamicQuizPage from './components/Quiz/IslamicQuizPage';
 import KhatmahPage from './components/Khatmah/KhatmahPage';
 import UserStatsPage from './components/Stats/UserStatsPage';
 import IslamicRulingsPage from './components/IslamicRulings/IslamicRulingsPage';
+import QiblaPage from './components/Qibla/QiblaPage';
+import ZakatPage from './components/Zakat/ZakatPage';
+import HijriPage from './components/Hijri/HijriPage';
 import './App.css';
 
 function App() {
@@ -39,8 +43,12 @@ function App() {
             <Route path="/quiz" element={<IslamicQuizPage />} />
             <Route path="/khatmah" element={<KhatmahPage />} />
             <Route path="/stats" element={<UserStatsPage />} />
+            <Route path="/qibla" element={<QiblaPage />} />
+            <Route path="/zakat" element={<ZakatPage />} />
+            <Route path="/hijri" element={<HijriPage />} />
           </Routes>
         </main>
+        <Footer />
       </div>
     </ThemeProvider>
   );
